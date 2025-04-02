@@ -1,0 +1,169 @@
+package Project;
+
+import java.io.PrintStream;
+
+public class Araba {
+   private String brand;
+   private String transmission;
+   private Integer minute;
+   private Integer day;
+   private Integer km;
+   private Integer day_price;
+   private boolean availability;
+   private String infoText;
+
+   Araba(String brand, String transsmission, int minute, boolean availability, String infoText) {
+      this.brand = brand;
+      this.transmission = this.transmission;
+      this.minute = minute;
+      this.setAvailability(availability);
+      this.infoText = infoText;
+      this.day = 0;
+      this.km = 0;
+   }
+
+   Araba(String brand, String transmission, int minute, int day, int km, boolean availability, int day_price, String infoText) {
+      this.brand = brand;
+      this.transmission = transmission;
+      this.minute = minute;
+      this.setAvailability(availability);
+      this.setDay(day);
+      this.setKm(km);
+      this.setDay_price(day_price);
+      this.infoText = infoText;
+   }
+
+   Araba(String brand, int day, int day_price, String transmission, boolean availability, String infoText) {
+      this.brand = brand;
+      this.transmission = transmission;
+      this.minute = 0;
+      this.setDay(day);
+      this.setDay_price(day_price);
+      this.setKm((Integer)null);
+      this.setAvailability(availability);
+      this.infoText = infoText;
+   }
+
+   public void setBrand(String brand) {
+      this.brand = brand;
+   }
+
+   public String getBrand() {
+      return this.brand;
+   }
+
+   public void setTransmission(String transmission) {
+      this.transmission = transmission;
+   }
+
+   public String getTransmission() {
+      return this.transmission;
+   }
+
+   public void setInfoText(String infoText) {
+      String var10001 = this.getBrand();
+      this.infoText = "Model: " + var10001 + " Availability:" + this.getAvailability() + " " + infoText;
+   }
+
+   public String getInfoText() {
+      return this.infoText;
+   }
+
+   public void setMinute(Integer minute) {
+      if (minute != null && minute >= 0) {
+         this.minute = minute;
+      } else {
+         this.minute = 0;
+      }
+
+   }
+
+   public Integer getMinute() {
+      return this.minute;
+   }
+
+   public void setAvailability(boolean availability) {
+      this.availability = availability;
+   }
+
+   public boolean getAvailability() {
+      return this.availability;
+   }
+
+   public Integer getDay_price() {
+      return this.day_price;
+   }
+
+   public void setDay_price(Integer day_price) {
+      this.day_price = day_price;
+   }
+
+   public Integer getKm() {
+      return this.km;
+   }
+
+   public void setKm(Integer km) {
+      this.km = km;
+   }
+
+   public Integer getDay() {
+      return this.day;
+   }
+
+   public void setDay(Integer day) {
+      if (day != null && day >= 0) {
+         this.day = day;
+      } else {
+         this.day = 0;
+      }
+
+   }
+
+   public void CarRent(Integer time, Kullanıcı user) {
+      if (this.getAvailability()) {
+         int total;
+         if (this.getMinute() > 0) {
+            total = this.getMinute() * time;
+            if (user.getBudget() >= total) {
+               user.setBudget(user.getBudget() - total);
+               this.setAvailability(false);
+               System.out.println("The car has been rented! Price: " + total);
+               System.out.println("Remaining Balance: " + String.valueOf(user.getBudget()));
+            } else {
+               System.out.println("Insufficient balance. Rental operation failed.");
+            }
+         } else {
+            total = this.getDay_price() * time;
+            if (user.getBudget() >= total) {
+               user.setBudget(user.getBudget() - total);
+               this.setAvailability(false);
+               System.out.println("The car has been rented! Price: " + total);
+               System.out.println("Remaining Balance: " + String.valueOf(user.getBudget()));
+            } else {
+               System.out.println("Insufficient balance. Rental operation failed.");
+            }
+         }
+      } else {
+         System.out.println("The car is not available to rent!");
+      }
+
+   }
+
+   public void CarInfo() {
+      PrintStream var10000 = System.out;
+      String var10001 = this.getBrand();
+      var10000.println("Model: " + var10001);
+      var10000 = System.out;
+      var10001 = this.getTransmission();
+      var10000.println("Transmission: " + var10001);
+      System.out.println("Rental Type: " + (this.getMinute() > 0 ? "Minute-Based" : "Daily-Based"));
+      var10000 = System.out;
+      var10001 = this.getMinute() > 0 ? String.valueOf(this.getMinute()) + " per minute" : "N/A";
+      var10000.println("Minute Rate: " + var10001);
+      var10000 = System.out;
+      var10001 = this.getDay_price() != null ? String.valueOf(this.getDay_price()) + " per day" : "N/A";
+      var10000.println("Daily Rate: " + var10001);
+      System.out.println("Availability: " + (this.getAvailability() ? "Available" : "Not Available"));
+      System.out.println("Additional Info: " + this.getInfoText());
+   }
+}
