@@ -1,0 +1,64 @@
+package Project;
+
+public class Luxury extends Araba {
+   private String wheeldrive;
+   private String colour;
+
+   public Luxury(String brand, int day, int day_price, String transmission, boolean availability, String infoText, String wheeldrive, String colour) {
+      super(brand, day, day_price, transmission, availability, infoText);
+      this.wheeldrive = wheeldrive;
+      this.colour = colour;
+   }
+
+   public String getWheeldrive() {
+      return this.wheeldrive;
+   }
+
+   public void setWheeldrive(String wheeldrive) {
+      this.wheeldrive = wheeldrive;
+   }
+
+   public String getColour() {
+      return this.colour;
+   }
+
+   public void setColour(String colour) {
+      this.colour = colour;
+   }
+
+   public void CarInfo() {
+      super.CarInfo();
+      System.out.println("Wheel Drive: " + this.getWheeldrive());
+      System.out.println("Colour: " + this.getColour());
+   }
+
+   public void CarRent(Integer time, Kullanıcı user) {
+      if (this.getAvailability()) {
+         int total;
+         if (this.getMinute() > 0) {
+            total = this.getMinute() * time;
+            if (user.getBudget() >= total) {
+               user.setBudget(user.getBudget() - total);
+               this.setAvailability(false);
+               System.out.println("The car has been rented! Price: " + total);
+               System.out.println("Remaining Balance: " + String.valueOf(user.getBudget()));
+            } else {
+               System.out.println("Insufficient balance. Rental operation failed.");
+            }
+         } else {
+            total = this.getDay_price() * time;
+            if (user.getBudget() >= total) {
+               user.setBudget(user.getBudget() - total);
+               this.setAvailability(false);
+               System.out.println("The car has been rented! Price: " + total);
+               System.out.println("Remaining Balance: " + String.valueOf(user.getBudget()));
+            } else {
+               System.out.println("Insufficient balance. Rental operation failed.");
+            }
+         }
+      } else {
+         System.out.println("The car is not available to rent!");
+      }
+
+   }
+}
