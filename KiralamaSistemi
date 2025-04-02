@@ -1,0 +1,129 @@
+package Project;
+
+import java.io.PrintStream;
+import java.util.Scanner;
+
+public class KiralamaSistemi {
+   public KiralamaSistemi() {
+   }
+
+   public void addMoney(Kullanıcı EnteredPerson, Integer money) {
+      if (money >= 0 && money <= 5000) {
+         EnteredPerson.setBudget(EnteredPerson.getBudget() + money);
+         PrintStream var10000 = System.out;
+         String var10001 = String.valueOf(money);
+         var10000.println(var10001 + " has been added to " + EnteredPerson.getName() + "'s Budget");
+         System.out.println("Current Budget is : " + String.valueOf(EnteredPerson.getBudget()));
+      } else {
+         System.out.println("Invalid Amount");
+      }
+
+   }
+
+   public static void main(String[] args) {
+      KiralamaSistemi system = new KiralamaSistemi();
+      Kullanıcı user1 = new Kullanıcı("Kerim", "Tahsil", 224536, 200);
+      Kullanıcı user2 = new Kullanıcı("Hakkı", "Temiz", 563422, 300);
+      Kullanıcı user3 = new Kullanıcı("Selen", "Tarık", 430764, 500);
+      Araba car1 = new Araba("Hyundai i20", "automatic", 11, true, "Available for rent");
+      Araba car2 = new Araba("Renault Clio", "manuel", 9, false, "Not available for rent");
+      Araba car3 = new Araba("Opel Corsa", "automatic", 13, 1, 10, true, 400, "Available for rent");
+      Araba car4 = new Araba("Dacia Sandero", "manuel", 12, 1, 10, true, 400, "Available for rent");
+      Araba car5 = new Araba("Bmw 218i", 1, 1500, "automatic", false, "Not available for rent");
+      Araba car6 = new Araba("Mercedes CLA200", 1, 2000, "automatic", true, "Available for rent");
+      Luxury lux1 = new Luxury("Audi A8 Sedan", 1, 3000, "automatic", true, "Available for rent", "4x4", "Black");
+      Kullanıcı EnteredPerson = null;
+      Scanner scanner = new Scanner(System.in);
+      System.out.println("Kullanıcı Adı: ");
+      String kullaniciAdi = scanner.nextLine();
+      System.out.println("Şifre: ");
+      Integer sifre = scanner.nextInt();
+      String var10001 = user1.getName();
+      if (kullaniciAdi.equals(var10001 + " " + user1.getSurname()) && user1.verifyPassword(sifre)) {
+         EnteredPerson = user1;
+      } else {
+         var10001 = user2.getName();
+         if (kullaniciAdi.equals(var10001 + " " + user2.getSurname()) && user2.verifyPassword(sifre)) {
+            EnteredPerson = user2;
+         } else {
+            var10001 = user3.getName();
+            if (!kullaniciAdi.equals(var10001 + " " + user3.getSurname()) || !user3.verifyPassword(sifre)) {
+               System.out.println("Invalid UserName or Password");
+               return;
+            }
+
+            EnteredPerson = user3;
+         }
+      }
+
+      while(true) {
+         System.out.println("\nSteps");
+         System.out.println("1. Add Money");
+         System.out.println("2. Rent a Car");
+         System.out.println("3. Show the Balance");
+         System.out.println("4. Exit ");
+         System.out.println("Choice: ");
+         int secim = scanner.nextInt();
+         switch (secim) {
+            case 1:
+               System.out.println("Enter the Value You Want To Add");
+               Integer money = scanner.nextInt();
+               system.addMoney(EnteredPerson, money);
+               break;
+            case 2:
+               System.out.println("Kiralamak istediğiniz arabayı seçin:");
+               System.out.println("1. Hyundai i20 (Dakikalık Kiralama)");
+               System.out.println("2. Renault Clio (Dakikalık Kiralama)");
+               System.out.println("3. Mercedes CLA200 (Günlük Kiralama)");
+               System.out.println("4. Opel Corsa (Dakikalık Kiralama) ");
+               System.out.println("5. BMW 218i (Dakikalık Kiralama) ");
+               System.out.println("6. Dacia Sandero (Dakikalık Kiralama)");
+               System.out.println("7. Audi A8 Sedan (Günlük Kiralama)");
+               int choice = scanner.nextInt();
+               int minute;
+               if (choice == 1) {
+                  System.out.println("How Many Minute You Will Rent");
+                  minute = scanner.nextInt();
+                  car1.CarRent(minute, EnteredPerson);
+               } else if (choice == 2) {
+                  System.out.println("How Many Minute You Will Rent");
+                  minute = scanner.nextInt();
+                  car2.CarRent(minute, EnteredPerson);
+               } else if (choice == 3) {
+                  System.out.println("How Many Day You Will Rent");
+                  minute = scanner.nextInt();
+                  car6.CarRent(minute, EnteredPerson);
+               } else if (choice == 4) {
+                  System.out.println("How Many Minute You Will Rent");
+                  minute = scanner.nextInt();
+                  car3.CarRent(minute, EnteredPerson);
+               } else if (choice == 5) {
+                  System.out.println("How Many Day You Will Rent");
+                  minute = scanner.nextInt();
+                  car5.CarRent(minute, EnteredPerson);
+               } else if (choice == 6) {
+                  System.out.println("How Many Minute You Will Rent");
+                  minute = scanner.nextInt();
+                  car4.CarRent(minute, EnteredPerson);
+               } else if (choice == 7) {
+                  System.out.println("How Many Day You Will Rent");
+                  minute = scanner.nextInt();
+                  lux1.CarRent(minute, EnteredPerson);
+               } else {
+                  System.out.println("Geçersiz seçenek");
+               }
+               break;
+            case 3:
+               PrintStream var10000 = System.out;
+               var10001 = EnteredPerson.getName();
+               var10000.println(var10001 + " Budget: " + String.valueOf(EnteredPerson.getBudget()));
+               break;
+            case 4:
+               System.out.println("Leaving...");
+               return;
+            default:
+               System.out.println("Unvalid Option, Try Again!");
+         }
+      }
+   }
+}
