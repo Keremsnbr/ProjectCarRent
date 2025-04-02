@@ -1,0 +1,26 @@
+package Project;
+
+public class PolyMorphismExample {
+   public PolyMorphismExample() {
+   }
+
+   public static void main(String[] args) {
+      Araba car1 = new Araba("Hyundai i20", "automatic", 11, true, "Available for rent");
+      Araba car2 = new Araba("Renault Clio", "manuel", 9, false, "Not available for rent");
+      Araba car3 = new Araba("Opel Corsa", "automatic", 13, 1, 10, true, 400, "Available for rent");
+      Araba car4 = new Araba("Dacia Sandero", "manuel", 12, 1, 10, true, 400, "Available for rent");
+      Araba car5 = new Araba("Bmw 218i", 1, 1500, "automatic", false, "Not available for rent");
+      Araba car6 = new Araba("Mercedes CLA200", 1, 2000, "automatic", true, "Available for rent");
+      Luxury lux1 = new Luxury("Audi A8 Sedan", 1, 3000, "automatic", true, "Available for rent", "4x4", "Black");
+      Araba[] cars = new Araba[]{car1, car2, car3, car4, car5, car6, lux1};
+      Araba[] var12 = cars;
+      int var11 = cars.length;
+
+      for(int var10 = 0; var10 < var11; ++var10) {
+         Araba car = var12[var10];
+         car.CarInfo();
+         System.out.println("-------------------------------");
+      }
+
+   }
+}
