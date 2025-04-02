@@ -1,0 +1,69 @@
+package Project;
+
+public class Kullanıcı {
+   private String name;
+   private String surname;
+   private Integer password;
+   private Integer budget;
+   private String infoText;
+   private Integer mon;
+
+   public Kullanıcı(String name, String surname, Integer password, Integer budget) {
+      this.name = name;
+      this.surname = surname;
+      this.password = password;
+      this.budget = budget;
+      this.setInfoText();
+   }
+
+   public void setName(String name) {
+      this.name = name;
+   }
+
+   public String getName() {
+      return this.name;
+   }
+
+   public void setSurname(String surname) {
+      this.surname = surname;
+   }
+
+   public String getSurname() {
+      return this.surname;
+   }
+
+   public void setPassword(Integer password) {
+      this.password = password;
+   }
+
+   public boolean verifyPassword(int inputPassword) {
+      return this.password.equals(inputPassword);
+   }
+
+   public Integer getPassword() {
+      return this.password;
+   }
+
+   public void setBudget(Integer mon) {
+      if (mon >= 0) {
+         this.budget = mon;
+         this.setInfoText();
+      } else {
+         System.out.println("Budget cannot be negative!");
+      }
+
+   }
+
+   public Integer getBudget() {
+      return this.budget;
+   }
+
+   public String getInfoText() {
+      return this.infoText;
+   }
+
+   public void setInfoText() {
+      String var10001 = this.getName();
+      this.infoText = "Name :" + var10001 + " Surname :" + this.getSurname() + " Budget: " + String.valueOf(this.getBudget());
+   }
+}
