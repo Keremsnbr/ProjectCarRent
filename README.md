@@ -16,4 +16,3 @@ This project provides a system where users can perform car rental operations. Th
 - **OOP Principles** (Encapsulation, Polymorphism, Inheritance)
 - **User Authentication System**
 
-## 📂 Project Structure
